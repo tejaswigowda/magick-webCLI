@@ -1,7 +1,5 @@
 # magick-webCLI
 
-[GitHub repo](https://github.com/tejaswigowda/magick-webCLI)
-
 A browser-based image editor powered by [magick-wasm](https://github.com/dlemstra/magick-wasm) (ImageMagick compiled to WebAssembly). No uploads, no servers, all processing happens locally in your browser.
 
 ▶ Live app: [https://tejaswigowda.com/magick-webCLI/](https://tejaswigowda.com/magick-webCLI/)
