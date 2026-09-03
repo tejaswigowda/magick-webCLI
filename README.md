@@ -4,7 +4,7 @@
 
 A browser-based image editor powered by [magick-wasm](https://github.com/dlemstra/magick-wasm) (ImageMagick compiled to WebAssembly). No uploads, no servers, all processing happens locally in your browser.
 
-▶ Live app: run it locally (see [Running Locally](#running-locally)) or host the `docs/` folder yourself.
+▶ Live app: [https://tejaswigowda.com/magick-webCLI/](https://tejaswigowda.com/magick-webCLI/)
 
 > Fourth in the webCLI family of zero-egress, offline-first browser tools, alongside [ffmpeg-webCLI](https://github.com/tejaswigowda/ffmpeg-webCLI), [whisper-webCLI](https://github.com/tejaswigowda/whisper-webCLI), and [3mf-webCLI](https://github.com/tejaswigowda/3mf-webCLI). Same look and feel, same privacy promise: your images never leave your device.
 
