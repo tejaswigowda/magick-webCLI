@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>magick-webCLI</title>
+<meta name="description" content="Browser-based ImageMagick image editor. No uploads, no servers, all processing happens locally via WebAssembly." />
+<meta name="theme-color" content="#0d1117" />
+<link rel="manifest" href="manifest.json" />
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="icons/icon.svg" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header class="app-header">
+  <div class="brand">
+    <i class="fa-solid fa-wand-magic-sparkles brand-mark" aria-hidden="true"></i>
+    <div>
+      <h1>magick<span class="accent">-webCLI</span></h1>
+      <p class="tagline">100+ image formats, converted &amp; edited entirely in your browser. Zero uploads.</p>
+    </div>
+  </div>
+  <div class="header-actions">
+    <div class="engine-status">
+      <span id="engineDot" class="status-dot status-dot--off"></span>
+      <span id="engineLabel">ImageMagick not loaded</span>
+    </div>
+    <a class="github-link" href="https://github.com/tejaswigowda/magick-webCLI" target="_blank" rel="noopener" aria-label="View source on GitHub">
+      <i class="fa-brands fa-github" aria-hidden="true"></i>
+      <span>GitHub</span>
+    </a>
+  </div>
+</header>
+
+<main class="layout">
+  <div class="col col-left">
+    <!-- INPUT -->
+    <section class="card" id="inputCard">
+      <div class="card-head">
+        <h2>&#9636; Input Images</h2>
+        <label class="toggle">
+          <input type="checkbox" id="batchToggle" />
+          <span>Batch mode</span>
+        </label>
+      </div>
+      <div class="dropzone" id="dropzone">
+        <input type="file" id="fileInput" accept="image/*" multiple hidden />
+        <p><strong>Drop image(s) here</strong> or click to browse</p>
+        <p class="hint">PNG, JPEG, WebP, GIF, BMP, TIFF, AVIF, HEIC, and more</p>
+      </div>
+      <div class="file-preview" id="filePreview" hidden>
+        <img id="previewImg" alt="preview" />
+        <dl class="meta-grid" id="metaGrid"></dl>
+      </div>
+      <ul class="batch-queue" id="batchQueue" hidden></ul>
+    </section>
+
+    <!-- OPERATIONS -->
+    <section class="card" id="opsCard">
+      <div class="card-head">
+        <h2>&#9881; Operations</h2>
+        <div class="mode-switch" id="modeSwitch">
+          <button type="button" class="mode-btn active" data-mode="single">Single</button>
+          <button type="button" class="mode-btn" data-mode="stack">Stack (chain)</button>
+        </div>
+      </div>
+
+      <div class="op-row">
+        <select id="opSelect" class="op-select"></select>
+        <span class="op-hint" id="opHint"></span>
+      </div>
+      <form id="opParams" class="op-params"></form>
+
+      <div class="stack-row" id="stackRow" hidden>
+        <button type="button" id="addToStack" class="btn btn-secondary"><i class="fa-solid fa-plus" aria-hidden="true"></i> Add to Stack</button>
+        <ol id="stackList" class="stack-list"></ol>
+        <code id="stackPreview" class="stack-preview"></code>
+      </div>
+
+      <!-- multi-input operation extras -->
+      <div id="multiInputExtras" class="multi-extras" hidden></div>
+    </section>
+  </div>
+
+  <div class="col col-right">
+    <!-- OUTPUT -->
+    <section class="card" id="outputCard">
+      <div class="card-head">
+        <h2>&#8681; Output</h2>
+      </div>
+      <div class="output-row">
+        <label>Format
+          <select id="formatSelect"></select>
+        </label>
+        <label id="qualityWrap">Quality
+          <input type="range" id="qualityRange" min="1" max="100" value="85" />
+          <span id="qualityValue">85</span>
+        </label>
+        <button type="button" id="processBtn" class="btn btn-primary" disabled><i class="fa-solid fa-play" aria-hidden="true"></i> <span id="processBtnLabel">Process</span></button>
+      </div>
+
+      <div class="result" id="result" hidden>
+        <img id="resultImg" alt="result" />
+        <div class="result-actions">
+          <a id="downloadLink" class="btn btn-secondary" download><i class="fa-solid fa-download" aria-hidden="true"></i> Download</a>
+          <span id="resultMeta" class="hint"></span>
+        </div>
+      </div>
+
+      <div class="batch-outputs" id="batchOutputs" hidden>
+        <div class="card-head">
+          <h3>Batch Outputs</h3>
+          <button type="button" id="zipAllBtn" class="btn btn-secondary"><i class="fa-solid fa-file-zipper" aria-hidden="true"></i> ZIP All</button>
+        </div>
+        <ul id="batchOutputList" class="batch-output-list"></ul>
+      </div>
+
+      <pre class="log" id="log"></pre>
+    </section>
+  </div>
+</main>
+
+<footer class="app-footer">
+  <p>Your images never leave this device. Verify it yourself: open DevTools &rarr; Network while processing.</p>
+  <p class="webcli-family">
+    <a href="https://github.com/tejaswigowda/magick-webCLI" target="_blank" rel="noopener"><i class="fa-brands fa-github" aria-hidden="true"></i> Source on GitHub</a>
+    &middot;
+    Part of the <a href="https://github.com/tejaswigowda/ffmpeg-webCLI" target="_blank" rel="noopener">Web-CLI family</a>
+    &middot;
+    <a href="https://arxiv.org/abs/2608.28950" target="_blank" rel="noopener">architecture paper</a>
+  </p>
+</footer>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>

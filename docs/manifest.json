@@ -1,0 +1,13 @@
+{
+  "name": "magick-webCLI",
+  "short_name": "magick-webCLI",
+  "description": "Browser-based ImageMagick image editor. No uploads, no servers, all processing happens locally via WebAssembly.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0d1117",
+  "theme_color": "#0d1117",
+  "icons": [
+    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
